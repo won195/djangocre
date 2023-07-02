@@ -1,1 +1,1 @@
-# djangoprac
+# djangocre
