@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post List</title>
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> {% endcomment %}
+</head>
+<body>
+    {% if post_list %}
+        <ul>
+        {% for post in post_list %}
+            <li><a href="{% url 'board:detail' post.id %}">{{ post.subject }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>질문이 없습니다.</p>
+    {% endif %}
+    {% comment %} <script src="{% static 'scripts.js' %}"></script> {% endcomment %}
+</body>
+</html>
+
