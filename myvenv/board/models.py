@@ -12,6 +12,6 @@ class Post(models.Model):
         return self.subject
 
 class Answer(models.Model):
-    question = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
