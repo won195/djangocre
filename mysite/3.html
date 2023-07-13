@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section style="margin-bottom: 2rem">
+        <hgroup>
+          <h2>제목</h2>
+          <h3>
+            부제목 <b><a href="http://127.0.0.1:8000/">링크</a></b>
+          </h3>
+        </hgroup>
+        <small> 내용 </small>
+      </section>
+      <div class="grid" style="margin-bottom: 2rem">
+        <canvas id="completionChart" width="100%"></canvas>
+        <canvas id="avgUserLevelChart" width="100%"></canvas>
+      </div>
+      <div class="grid" style="margin-bottom: 2rem">
+        <canvas id="pieChart" width="100%"></canvas>
+        <canvas id="doughnutChart" width="100%"></canvas>
+      </div>
+      <div class="grid" style="margin-bottom: 2rem">
+        <canvas id="radarChart" width="100%"></canvas>
+      </div>
+    </main>
+  </body>
+</html>

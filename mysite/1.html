@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="completionChart" width="50%" height="50%"></canvas>
+    <canvas id="avgUserLevelChart" width="50%" height="50%"></canvas>
+    <canvas id="pieChart" width="50%" height="50%"></canvas>
+    <canvas id="doughnutChart" width="50%" height="50%"></canvas>
+    <canvas id="radarChart" width="50%" height="50%"></canvas>
+
+    <script>
+        let labels_completion = {{ labels_completion|safe }};
+        let values_completion = {{ values_completion|safe }};
+        let labels_avg_user_level = {{ labels_avg_user_level|safe }};
+        let values_avg_user_level = {{ values_avg_user_level|safe }};
+        let labels_pie_chart = {{ labels_pie_chart|safe }};
+        let values_pie_chart = {{ values_pie_chart|safe }};
+        let labels_doughnut_chart = {{ labels_doughnut_chart|safe }};
+        let values_doughnut_chart = {{ values_doughnut_chart|safe }};
+        let labels_radar_chart = {{ labels_radar_chart|safe }};
+        let values_radar_chart = {{ values_radar_chart|safe }};
+
+        let ctx1 = document.getElementById('completionChart').getContext('2d');
+        let completionChart = new Chart(ctx1, {
+          type: 'bar',
+          data: {
+              labels: labels_completion,
+              datasets: [{
+                  label: 'Completion',
+                  data: values_completion,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              aspectRatio: 2,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  display:true,
+                  title:{
+                      display:true,
+                      text:'Average User Level Rating (1-10)',
+                      font:{
+                          style:'normal',
+                          lineHeight :1.2
+                      },
+                      padding:{top :0,left :0,right :0,bottom :5}
+                  }
+              },
+              x:{
+                  beginAtZero:true,
+                  display:true,
+                  title:{
+                      display:true,
+                      text:'Bite ID',
+                      font:{
+                          style:'normal',
+                          lineHeight :1.2
+                      },
+                      padding:{top :5,left :0,right :0,bottom :0}
+                  }
+              }
+          }
+      }
+  });
+
+
+        let ctx2 = document.getElementById('avgUserLevelChart').getContext('2d');
+        let avgUserLevelChart = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: labels_avg_user_level,
+                datasets: [{
+                    label: 'Average User Level',
+                    data: values_avg_user_level,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+              aspectRatio: 2,
+              scales: {
+                  y: {
+                      beginAtZero: true,
+                      display:true,
+                      title:{
+                          display:true,
+                          text:'Average User Level Rating (1-10)',
+                          font:{
+                              style:'normal',
+                              lineHeight :1.2
+                          },
+                          padding:{top :0,left :0,right :0,bottom :5}
+                      }
+                  },
+                  x:{
+                      beginAtZero:true,
+                      display:true,
+                      title:{
+                          display:true,
+                          text:'Bite ID',
+                          font:{
+                              style:'normal',
+                              lineHeight :1.2
+                          },
+                          padding:{top :5,left :0,right :0,bottom :0}
+                      }
+                  }
+              }
+          }
+      });
+
+
+      let ctx3 = document.getElementById('pieChart').getContext('2d');
+      let pieChart = new Chart(ctx3, {
+          type: 'pie',
+          data: {
+              labels: labels_pie_chart,
+              datasets: [{
+                  label: 'Pie Chart',
+                  data: values_pie_chart,
+                  backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                  borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+            aspectRatio: 2,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    display:true,
+                    title:{
+                        display:true,
+                        text:'Pie Chart',
+                        font:{
+                            style:'normal',
+                            lineHeight :1.2
+                        },
+                        padding:{top :0,left :0,right :0,bottom :5}
+                    }
+                  },
+                  x:{
+                        beginAtZero:true,
+                        display:true,
+                        title:{
+                            display:true,
+                            text:'Labels',
+                            font:{
+                                style:'normal',
+                                lineHeight :1.2
+                            },
+                            padding:{top :5,left :0,right :0,bottom :0}
+                }
+            }
+          }
+      }
+    });
+
+      let ctx4 = document.getElementById('doughnutChart').getContext('2d');
+      let doughnutChart = new Chart(ctx4, {
+          type: 'doughnut',
+          data: {
+              labels: labels_doughnut_chart,
+              datasets: [{
+                  label: 'Doughnut Chart',
+                  data: values_doughnut_chart,
+                  backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                  borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+            aspectRatio: 2,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    display:true,
+                    title:{
+                        display:true,
+                        text:'Doughnut Chart',
+                        font:{
+                            style:'normal',
+                            lineHeight :1.2
+                        },
+                        padding:{top :0,left :0,right :0,bottom :5}
+                    }
+                },
+                x:{
+                    beginAtZero:true,
+                    display:true,
+                    title:{
+                        display:true,
+                        text:'Labels',
+                        font:{
+                            style:'normal',
+                            lineHeight :1.2
+                        },
+                        padding:{top :5,left :0,right :0,bottom :0}
+                    }
+                }
+              }
+          }
+      });
+
+      let ctx5 = document.getElementById('radarChart').getContext('2d');
+      let radarChart = new Chart(ctx5, {
+          type: 'radar',
+          data: {
+              labels: labels_radar_chart,
+              datasets: [{
+              label: 'Radar Chart',
+                  data: values_radar_chart,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+            aspectRatio: 2,
+            scales: {
+              y: {
+                  beginAtZero: true,
+                  display:true,
+                  title:{
+                      display:true,
+                      text:'Radar Chart',
+                      font:{
+                          style:'normal',
+                          lineHeight :1.2
+                      },
+                      padding:{top :0,left :0,right :0,bottom :5}
+                  }
+              },
+              x:{
+                  beginAtZero:true,
+                  display:true,
+                  title:{
+                      display:true,
+                      text:'Labels',
+                      font:{
+                          style:'normal',
+                          lineHeight :1.2
+                      },
+                      padding:{top :5,left :0,right :0,bottom :0}
+                  }
+              }
+              }
+          }
+      });
+    </script>
+</body>
+</html>
