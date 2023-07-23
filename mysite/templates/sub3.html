@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href='/static/styles.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>    <title>Graph</title>
+  </head>
+
+  <body>
+    <div class='container'>
+      <div class='topbar'>
+        <div class="logo">
+          <h2><a href="/">Brand.</a></h2>
+        </div>
+        <div class="serach">
+          <input type="text" id="search" placeholder="search here">
+          <label for="search"> <i class="fas fa-search"></i></label>
+        </div>
+        <i class="fas fa-bell"></i>
+        <div class="user">
+          <img src="img/user.png" alt="">
+        </div>
+      </div>
+      <div class='sidebar'>
+        <ul>
+          <li>
+            <a href="/sub1">
+              <i class="fas fa-solid fa-bolt"></i>
+              <div>2023전력수요예측</div>
+            </a>
+          </li>
+          <li>
+            <a href="/sub2/">
+              <i class="fas fa-regular fa-plug"></i>
+              <div><b>전력관리란?</b></div>
+            </a>
+          </li>
+          <li>
+            <a href="/sub3/">
+              <i class="fas fa-regular fa-fas fa-temperature-high"></i>
+              <div>기온별</div>
+            </a>
+          </li>
+          <li>
+            <a href="/sub4/">
+              <i class="fas fa-solid fa-map"></i>
+              <div>구별/용도별</div>
+            </a>
+          </li>
+          <li>
+            <a href="/sub5/">
+              <i class="fas fa-far fa-far fa-clock"></i>
+              <div>시간별</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class='main'>
+        <div class="cards">
+          <div class="card">
+            <div class="card-content">
+              <div class="number">전력수요가 많은 날씨</div>
+              <div class="card-name">27도 이상</div>
+            </div>
+            <div class="icon-box">
+              <i class="fas fa-solid fa-bolt"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="number">전력수요가 적은 날씨</div>
+              <div class="card-name">15도 이하</div>
+            </div>
+            <div class="icon-box">
+              <i class="fas fa-solid fa-bolt"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="number">여기엔 </div>
+              <div class="card-name">name</div>
+            </div>
+            <div class="icon-box">
+              <i class="fas fa-solid fa-bolt"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="number">딱히</div>
+              <div class="card-name">name</div>
+            </div>
+            <div class="icon-box">
+              <i class="fas fa-solid fa-bolt"></i>
+            </div>
+          </div>
+        </div>
+        <div class="charts">
+          <div class="chart">
+            <h2>기온별 전력수요량</h2>
+            <div>
+              <select id="yearSelect" onchange="updateChart()">
+                {% for year in years %}
+                  <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+        </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+          const data = {
+            '2017': {
+              '1': 3839660213,
+              '2': 3859008614,
+              '3': 3373445308,
+              '4': 3180040285,
+              '5': 3014127605,
+              '6': 3331763126,
+              '7': 3930488515,
+              '8': 4330800552,
+              '9': 3682385329,
+              '10': 3039326321,
+              '11': 3175834142,
+              '12': 3645859762
+            },
+            '2018': {
+              '1': 4115885382,
+              '2': 4106778776,
+              '3': 3344442923,
+              '4': 3182167954,
+              '5': 3063136587,
+              '6': 3369455096,
+              '7': 3893393797,
+              '8': 4859074686,
+              '9': 3896214894,
+              '10': 3012739856,
+              '11': 3133830512,
+              '12': 3588831341
+            },
+            '2019': {
+              '1': 4043832171,
+              '2': 3763419349,
+              '3': 3259080923,
+              '4': 3255686011,
+              '5': 3103467204,
+              '6': 3349078440,
+              '7': 3785693625,
+              '8': 4424725409,
+              '9': 3913050339,
+              '10': 3238933716,
+              '11': 3142235433,
+              '12': 3478673614
+            },
+            '2020': {
+              '1': 3815111795,
+              '2': 3656839827,
+              '3': 3293720502,
+              '4': 3046469745,
+              '5': 2950607363,
+              '6': 3365384734,
+              '7': 3693987938,
+              '8': 3985869202,
+              '9': 3832103964,
+              '10': 2962917835,
+              '11': 3082665744,
+              '12': 3524450585
+            },
+            '2021': {
+              '1': 3966235427,
+              '2': 3722526194,
+              '3': 3183676451,
+              '4': 3075935564,
+              '5': 2966433178,
+              '6': 3325567990,
+              '7': 3937428757,
+              '8': 4519696500,
+              '9': 3719263713,
+              '10': 3204543889,
+              '11': 3156503493,
+              '12': 3618887492
+            },
+            '2022': {
+              '1': 4081271491,
+              '2': 3899922687,
+              '3': 3427319650,
+              '4': 3200754536,
+              '5': 3127105720,
+              '6': 3434101610,
+              '7': 4154420955,
+              '8': 4522032282,
+              '9': 3856635650,
+              '10': 3234392442,
+              '11': 3154535432,
+              '12': 3697023125
+            }
+          };
+        
+          const ctx = document.getElementById('barChart').getContext('2d');
+          const barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'Bar Chart',
+                data: [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 5000000000
+                }
+              }
+            }
+          });
+        
+          function updateChart() {
+            const yearSelect = document.getElementById('yearSelect');
+            const selectedYear = yearSelect.value;
+            const selectedData = data[selectedYear];
+        
+            const labels = Object.keys(selectedData).map((label) => parseInt(label));
+            const values = Object.values(selectedData);
+
+            barChart.data.labels = labels;
+            barChart.data.datasets[0].data = values;
+            barChart.update();
+          }
+        </script>
+        </body>
+        </html>

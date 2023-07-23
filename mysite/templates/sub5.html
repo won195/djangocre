@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href='/static/styles.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>    <title>Graph</title>
+  </head>
+
+  <body>
+    <div class='container'>
+      <div class='topbar'>
+        <div class="logo">
+          <h2><a href="/">Brand.</a></h2>
+        </div>
+        <div class="serach">
+          <input type="text" id="search" placeholder="search here">
+          <label for="search"> <i class="fas fa-search"></i></label>
+        </div>
+        <i class="fas fa-bell"></i>
+        <div class="user">
+          <img src="img/user.png" alt="">
+        </div>
+      </div>
+      <div class='sidebar'>
+        <ul>
+          <li>
+            <a href="/sub1">
+              <i class="fas fa-solid fa-bolt"></i>
+              <div>2023전력수요예측</div>
+            </a>
+          </li>
+          <li>
+            <a href="/sub2/">
+              <i class="fas fa-regular fa-plug"></i>
+              <div><b>전력관리란?</b></div>
+            </a>
+          </li>
+          <li>
+            <a href="/sub3/">
+              <i class="fas fa-regular fa-fas fa-temperature-high"></i>
+              <div>기온별</div>
+            </a>
+          </li>
+          <li>
+            <a href="/sub4/">
+              <i class="fas fa-solid fa-map"></i>
+              <div>구별/용도별</div>
+            </a>
+          </li>
+          <li>
+            <a href="/sub5/">
+              <i class="fas fa-far fa-far fa-clock"></i>
+              <div>시간별</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class='main'>
+        <div class="cards">
+          <div class="card">
+            <div class="card-content">
+              <div class="number">전력사용이 많은 시간대</div>
+              <div class="card-name">오후 3시</div>
+            </div>
+            <div class="icon-box">
+              <i class="fas fa-solid fa-clock"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="number">최대전력사용량</div>
+              <div class="card-name">123,456KWh</div>
+            </div>
+            <div class="icon-box">
+              <i class="fas fa-solid fa-bolt"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="number">전력사용이 적은 시간대</div>
+              <div class="card-name">새벽 3시</div>
+            </div>
+            <div class="icon-box">
+              <i class="fas fa-solid fa-clock"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="number">최소전력사용량</div>
+              <div class="card-name">98,234KWh</div>
+            </div>
+            <div class="icon-box">
+              <i class="fas fa-solid fa-bolt"></i>
+            </div>
+          </div>
+        </div>
+        <div class="charts">
+          <div class="chart">
+            <h2>시간별 전력사용량</h2>
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-heatmap"></script>
+    <script src="/static/chart1.js"></script>
+    <script src="/static/chart2.js"></script>
+    <script src="/static/chart3.js"></script>
+    <script src="/static/chart4.js"></script>
+    <script src="/static/chart5.js"></script>
+    <script src="/static/chart6.js"></script>
+    <script>
+    const labels = {{ labels|safe }};
+      const values = {{ values|safe }};
+
+      const ctx = document.getElementById('lineChart').getContext('2d');
+      const lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Line Chart ',
+            data: values,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

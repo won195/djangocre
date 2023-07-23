@@ -1,314 +1,777 @@
 <!DOCTYPE html>
+<html lang="ko">
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Graph</title>
+    <link rel="stylesheet" href='/static/styles.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>    <title>Graph</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logos/favicon.png" />
+    <link rel="stylesheet" href="/static/styles.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-      .container {
-        margin: 0 auto;
-        width: 80%;
-      }
-
-      .grid {
-        display: flex;
-      }
-
-      .grid > div {
-        flex: 1;
-      }
-
-      .canvas-container {
-        position: relative;
-        width: 50%;
-        padding-bottom: 25%;
-      }
-
-      .canvas-container canvas {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
-    </style>
   </head>
+
   <body>
-    <main class="container">
-      <section style="margin-bottom: 1.5rem">
-        <hgroup>
-          <h2>제목</h2>
-          <h3>
-            부제목 <b><a href="http://127.0.0.1:8000/">링크</a></b>
-          </h3>
-        </hgroup>
-        <small> 
-          내용 
-        </small>
-      </section>
-      <div class="grid" style="margin-bottom: 1fr">
-        <div class="canvas-container">
-          <canvas id="completionChart"></canvas>
+      <!--  Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="./index.html" class="text-nowrap logo-img">
+            <img src="/img/logos/dark-logo.svg" width="180" alt="" />
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+            <i class="ti ti-x fs-8"></i>
+          </div>
         </div>
-        <div class="canvas-container">
-          <canvas id="avgUserLevelChart"></canvas>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+          <ul id="sidebarnav">
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Home</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                <span class="hide-menu">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">GRAPH</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-article"></i>
+                </span>
+                <span class="hide-menu">2023전력수요예측</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-alert-circle"></i>
+                </span>
+                <span class="hide-menu">전력수요관리란?</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-cards"></i>
+                </span>
+                <span class="hide-menu">월별전력수요</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">구별/용도별전력수요</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-typography"></i>
+                </span>
+                <span class="hide-menu">시간별전력수요</span>
+              </a>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Login</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-login"></i>
+                </span>
+                <span class="hide-menu">Register</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-user-plus"></i>
+                </span>
+                <span class="hide-menu">Register</span>
+              </a>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">삭제희망</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-mood-happy"></i>
+                </span>
+                <span class="hide-menu">근데공간남아</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-aperture"></i>
+                </span>
+                <span class="hide-menu">어떻게든살려볼까</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                <i class="ti ti-bell-ringing"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+            </li>
+          </ul>
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+              <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">뿌뿌</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <img src="/img/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-user fs-6"></i>
+                      <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-mail fs-6"></i>
+                      <p class="mb-0 fs-3">My Account</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-list-check fs-6"></i>
+                      <p class="mb-0 fs-3">My Task</p>
+                    </a>
+                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!--  Header End -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+        <div class="row">
+          <div class="col-lg-8 d-flex align-items-strech">
+            <div class="card w-100">
+              <div class="card-body">
+                <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                  <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold">2023전력수요예측</h5>
+                  </div>
+                </div>
+                <div id="chart"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- 전력예비율 -->
+                <div class="card overflow-hidden">
+                  <div class="card-body p-4">
+                    <h5 class="card-title mb-9 fw-semibold">전력예비율</h5>
+                    <div class="row align-items-center">
+                      <div class="col-8">
+                        <h4 class="fw-semibold mb-3">24%</h4>
+                        <div class="d-flex align-items-center mb-3">
+                          <span
+                            class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-arrow-up-left text-success"></i>
+                          </span>
+                          <p class="text-dark me-1 fs-3 mb-0">+2%</p>
+                          <p class="fs-3 mb-0">last day</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <div class="me-4">
+                            <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
+                            <span class="fs-2">예비율</span>
+                          </div>
+                          <div>
+                            <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
+                            <span class="fs-2">공급능력</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                          <div id="breakup"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <!-- 기온변화 -->
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row alig n-items-start">
+                      <div class="col-8">
+                        <h5 class="card-title mb-9 fw-semibold"> 기온변화 </h5>
+                        <h4 class="fw-semibold mb-3">30°C</h4>
+                        <div class="d-flex align-items-center pb-1">
+                          <span
+                            class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-arrow-down-right text-danger"></i>
+                          </span>
+                          <p class="text-dark me-1 fs-3 mb-0">-1%</p>
+                          <p class="fs-3 mb-0">last day</p>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="d-flex justify-content-end">
+                          <div
+                            class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-currency-dollar fs-6"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="earning"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <div class="mb-4">
+                  <h5 class="card-title fw-semibold">Recent Transactions</h5>
+                </div>
+                <ul class="timeline-widget mb-0 position-relative mb-n5">
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">00:00am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1">123,456kWh</div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">10:00 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-info flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">123,456kWh <a
+                        href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
+                    </div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1">123,456kWh</div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">123,456kWh <a
+                        href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
+                    </div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">123,456kWh 
+                    </div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1">123,456kWh</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <h5 class="card-title fw-semibold mb-4">Recent Transactions</h5>
+                <div class="table-responsive">
+                  <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4">
+                      <tr>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Id</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">시도</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">시군구</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">용도구분</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">전력수요량</h6>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
+                        <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">서울시</h6>
+                            <span class="fw-normal">Web Designer</span>                          
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">강남구</p>
+                        </td>
+                        <td class="border-bottom-0">
+                          <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-primary rounded-3 fw-semibold">공업용</span>
+                          </div>
+                        </td>
+                        <td class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0 fs-4">123,456kWh</h6>
+                        </td>
+                      </tr> 
+                      <tr>
+                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
+                        <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">서울시</h6>
+                            <span class="fw-normal">Project Manager</span>                          
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">마포구</p>
+                        </td>
+                        <td class="border-bottom-0">
+                          <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-secondary rounded-3 fw-semibold">주택용</span>
+                          </div>
+                        </td>
+                        <td class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0 fs-4">123,456kWh</h6>
+                        </td>
+                      </tr> 
+                      <tr>
+                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">3</h6></td>
+                        <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">서울시</h6>
+                            <span class="fw-normal">Project Manager</span>                          
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">종로구</p>
+                        </td>
+                        <td class="border-bottom-0">
+                          <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-danger rounded-3 fw-semibold">군부대</span>
+                          </div>
+                        </td>
+                        <td class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0 fs-4">123,456kWh</h6>
+                        </td>
+                      </tr>      
+                      <tr>
+                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">4</h6></td>
+                        <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-1">서울시</h6>
+                            <span class="fw-normal">Frontend Engineer</span>                          
+                        </td>
+                        <td class="border-bottom-0">
+                          <p class="mb-0 fw-normal">노원구</p>
+                        </td>
+                        <td class="border-bottom-0">
+                          <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success rounded-3 fw-semibold">안전설비</span>
+                          </div>
+                        </td>
+                        <td class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0 fs-4">123,456kWh</h6>
+                        </td>
+                      </tr>                       
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xl-3">
+            <div class="card overflow-hidden rounded-2">
+              <div class="position-relative">
+                <a href="javascript:void(0)"><img src="../assets/images/products/s4.jpg" class="card-img-top rounded-0" alt="..."></a>
+                <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
+              <div class="card-body pt-3 p-4">
+                <h6 class="fw-semibold fs-4">Boat Headphone</h6>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h6 class="fw-semibold fs-4 mb-0">$50 <span class="ms-2 fw-normal text-muted fs-3"><del>$65</del></span></h6>
+                  <ul class="list-unstyled d-flex align-items-center mb-0">
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="card overflow-hidden rounded-2">
+              <div class="position-relative">
+                <a href="javascript:void(0)"><img src="../assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."></a>
+                <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
+              <div class="card-body pt-3 p-4">
+                <h6 class="fw-semibold fs-4">MacBook Air Pro</h6>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h6 class="fw-semibold fs-4 mb-0">$650 <span class="ms-2 fw-normal text-muted fs-3"><del>$900</del></span></h6>
+                  <ul class="list-unstyled d-flex align-items-center mb-0">
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="card overflow-hidden rounded-2">
+              <div class="position-relative">
+                <a href="javascript:void(0)"><img src="../assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
+                <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
+              <div class="card-body pt-3 p-4">
+                <h6 class="fw-semibold fs-4">Red Valvet Dress</h6>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h6 class="fw-semibold fs-4 mb-0">$150 <span class="ms-2 fw-normal text-muted fs-3"><del>$200</del></span></h6>
+                  <ul class="list-unstyled d-flex align-items-center mb-0">
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="card overflow-hidden rounded-2">
+              <div class="position-relative">
+                <a href="javascript:void(0)"><img src="../assets/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
+                <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
+              <div class="card-body pt-3 p-4">
+                <h6 class="fw-semibold fs-4">Cute Soft Teddybear</h6>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h6 class="fw-semibold fs-4 mb-0">$285 <span class="ms-2 fw-normal text-muted fs-3"><del>$345</del></span></h6>
+                  <ul class="list-unstyled d-flex align-items-center mb-0">
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                    <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="py-6 px-6 text-center">
+          <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a></p>
         </div>
       </div>
-      <div class="grid" style="margin-bottom: 2fr">
-        <div class="canvas-container">
-          <canvas id="pieChart"></canvas>
-        </div>
-        <div class="canvas-container">
-          <canvas id="doughnutChart"></canvas>
-        </div>
-      </div>
-      <div class="grid" style="margin-bottom: 3fr">
-        <canvas id="radarChart"></canvas>
-      </div>
-    </main>
-
-    <script>
-            const labels_completion = {{ labels_completion|safe }};
-            const values_completion = {{ values_completion|safe }};
-            const labels_avg_user_level = {{ labels_avg_user_level|safe }};
-            const values_avg_user_level = {{ values_avg_user_level|safe }};
-            const labels_pie_chart = {{ labels_pie_chart|safe }};
-            const values_pie_chart = {{ values_pie_chart|safe }};
-            const labels_doughnut_chart = {{ labels_doughnut_chart|safe }};
-            const values_doughnut_chart = {{ values_doughnut_chart|safe }};
-            const labels_radar_chart = {{ labels_radar_chart|safe }};
-            const values_radar_chart = {{ values_radar_chart|safe }};
-
-            const ctx1 = document.getElementById('completionChart').getContext('2d');
-            const completionChart = new Chart(ctx1, {
-              type: 'bar',
-              data: {
-                  labels: labels_completion,
-                  datasets: [{
-                      label: 'Completion',
-                      data: values_completion,
-                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                      borderColor: 'rgba(75, 192, 192, 1)',
-                      borderWidth: 2
-                  }]
-              },
-              options: {
-                  aspectRatio: 2,
-                  scales: {
-                    y: {
-                      beginAtZero: true,
-                      display:true,
-                      title:{
-                          display:true,
-                          text:'Average User Level Rating (1-10)',
-                          font:{
-                              style:'normal',
-                              lineHeight :1.2
-                          },
-                          padding:{top :0,left :0,right :0,bottom :5}
-                      }
-                  },
-                  x:{
-                      beginAtZero:true,
-                      display:true,
-                      title:{
-                          display:true,
-                          text:'Bite ID',
-                          font:{
-                              style:'normal',
-                              lineHeight :1.2
-                          },
-                          padding:{top :5,left :0,right :0,bottom :0}
-                      }
-                  }
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/libs/jquery/dist/jquery.min.js"></script>
+  <script src="/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/sidebarmenu.js"></script>
+  <script src="/js/app.min.js"></script>
+  <script src="/libs/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="/libs/simplebar/dist/simplebar.js"></script>
+  <script >
+    var chart = {
+      series: [
+        { name: "Earnings this month:", data: [113273369,130090347,134870292,135858222,137014775,136590572,125433787,119254690,135583752,139798905,140160524,140646395,139525593,127665533,120795964,136466513,140073398,139893875,139920723,138435671,126316076,119298611,134936587,138626536,138642623,138971174,137884270,126246649,119779725,136019304,140342625,141003284,
+        141966314,141482345,130395087,124405917,141032137,145634527,146452714,147440647,146841063,135493208,129097554,145174112,149089931,149094331,149154151,147527902,135073100,127510549,142382143,145077839,143870331,142749728,139997151,126491533,117973391,132002179,133982866,132200283,130653552,127629515,114009453,105532861,119754893,122073101,120762035,119807978,117482746,104650818,97033564,112167158,115429804,115076799,115075737,113680732,101739944,94960138,110864892,114822029,115078845,115597389,114628704,103020290,96480557,112536843,116562630,116812492,117257072,116157000,104370011,97615054,113429979,117198435,117184529,117367552,116015680,103992931,97023160,112647684,116252168,116101332,116173760,114735739,
+        102648386,95631841,111223118,114803230,114632135,114683785,113220196,101098780,94036722,109568976,113075502,112816279,112766387,111190048,98947905,91761291,107170091,110559803,110196359,110060985,108424022,96151967,88971521,104427235,107908378,107683592,107735618,106335018,94347164,87496276,103323092,107211826,107424929,107937980,107013591,95508622,
+        89138447,105434890,109773425,110408204,111307185,110726267,99516700,93389522,109873619,114343015,115051943,115969959,115356036,104065867,97816166,114142546,118426601,118930735,119633025,118801039,107298874,100851195,117000863,121135787,121523560,122146165,121273670,109771200,103362945,119589818,123836386,124365617,125153758,124464230,113154831,
+        106942011,123358793,127781994,128467249,129384157,128790429,117539307,111344024,127735873,132091513,132668047,133438148,132664144,121205327,114782231,130934497,135047922,135389247,135940979,134975147,123360279,116825360,132917389,137028141,137428717,138104149,137327016,125964320,119741411,136199566,140722854,141572828,142723354,142434489,131559670,125809996,
+        142712189,147635856,148828594,150251218,150152027,139374353,133621162,150413284,155116888,155978740,156961507,156318028,144898793,138416405,154403595,158240418,158189168,158229305,156631287,144263604,136856760,151960821,154972143,154167855,153540375,151370898,138536124,130772019,145631207,148509624,147681008,
+        147131505,145133328,132551735,125109104,140342703,143631780,143232517,143113136,141528066,129325431,122211613,137709492,141185946,140887178,140774119,139096818,126702074,119298061,134412534,137420218,136577929,135859702,133530824,120455061,112358812,126788814,129139011,127685133,126419300,123623545,110176568,
+        101817464,116103066,118434517,117091642,116067409,113641432,100686756,92933743,107927627,111055401,110580557,110477993,109007990,97023525,90234688,106166792,110187784,110543497,111193026,110383124,98955860,92613322,108875915,113109881,113562577,114197767,113269863,101631341,94997114,110902450,114730048,114744820,114928678,
+        113554238,101491705,94472742,110047896,113613240,113444776,113532911,112155920,100186687,93356501,109212515,113144498,113419440,114016301,113199826,101827697,95614785,112091102,116629070,117478643,118602567,118250686,107267533,101356987,118040552,122684891,123537121,124560174,124007103,112728592,106437439,122666589,126796331,
+        127089215,127524959,126374267,114505834,107650301,123357763,127024470,126927268,127058089,125697403,113720930,106863377,122675824,126552377,126764665,127296459,126417361,114989808,108733192,125181674,129711320,130575112,131738110,131451666,120560967,114769646,] },
+      ],
+    
+      chart: {
+        type: "line",
+        height: 345,
+        offsetX: -15,
+        toolbar: { show: true },
+        foreColor: "#adb0bb",
+        fontFamily: 'inherit',
+        sparkline: { enabled: false },
+      },
+    
+      colors: ["#5D87FF", "#49BEFF"],
+    
+      markers: { size: 0 },
+    
+      dataLabels: {
+        enabled: false,
+      },
+    
+      legend: {
+        show: false,
+      },
+    
+      grid: {
+        borderColor: "rgba(0,0,0,0.1)",
+        strokeDashArray: 3,
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+    
+      xaxis: {
+        type: "datetime",
+        labels: {
+          style: { cssClass: "grey--text lighten-2--text fill-color" },
+        },
+        tickAmount: 5,
+        tickPlacement: 'on',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        tooltip: {
+          enabled: false
+        },
+        categories: ["2023-01-01","2023-01-02","2023-01-03","2023-01-04","2023-01-05","2023-01-06","2023-01-07","2023-01-08","2023-01-09","2023-01-10","2023-01-11","2023-01-12","2023-01-13","2023-01-14","2023-01-15","2023-01-16","2023-01-17","2023-01-18","2023-01-19","2023-01-20","2023-01-21","2023-01-22","2023-01-23","2023-01-24","2023-01-25","2023-01-26","2023-01-27","2023-01-28","2023-01-29","2023-01-30","2023-01-31",
+        "2023-02-01","2023-02-02","2023-02-03","2023-02-04","2023-02-05","2023-02-06","2023-02-07","2023-02-08","2023-02-09","2023-02-10","2023-02-11","2023-02-12","2023-02-13","2023-02-14","2023-02-15","2023-02-16","2023-02-17","2023-02-18","2023-02-19","2023-02-20","2023-02-21","2023-02-22","2023-02-23","2023-02-24","2023-02-25","2023-02-26","2023-02-27","2023-02-28",
+        "2023-03-01","2023-03-02","2023-03-03","2023-03-04","2023-03-05","2023-03-06","2023-03-07","2023-03-08","2023-03-09","2023-03-10","2023-03-11","2023-03-12","2023-03-13","2023-03-14","2023-03-15","2023-03-16","2023-03-17","2023-03-18","2023-03-19","2023-03-20","2023-03-21","2023-03-22","2023-03-23","2023-03-24","2023-03-25","2023-03-26","2023-03-27","2023-03-28","2023-03-29","2023-03-30","2023-03-31",
+        "2023-04-01","2023-04-02","2023-04-03","2023-04-04","2023-04-05","2023-04-06","2023-04-07","2023-04-08","2023-04-09","2023-04-10","2023-04-11","2023-04-12","2023-04-13","2023-04-14","2023-04-15","2023-04-16","2023-04-17","2023-04-18","2023-04-19","2023-04-20","2023-04-21","2023-04-22","2023-04-23","2023-04-24","2023-04-25","2023-04-26","2023-04-27","2023-04-28","2023-04-29","2023-04-30",
+        "2023-05-01","2023-05-02","2023-05-03","2023-05-04","2023-05-05","2023-05-06","2023-05-07","2023-05-08","2023-05-09","2023-05-10","2023-05-11","2023-05-12","2023-05-13","2023-05-14","2023-05-15","2023-05-16","2023-05-17","2023-05-18","2023-05-19","2023-05-20","2023-05-21","2023-05-22","2023-05-23","2023-05-24","2023-05-25","2023-05-26","2023-05-27","2023-05-28","2023-05-29","2023-05-30","2023-05-31",
+        "2023-06-01","2023-06-02","2023-06-03","2023-06-04","2023-06-05","2023-06-06","2023-06-07","2023-06-08","2023-06-09","2023-06-10","2023-06-11","2023-06-12","2023-06-13","2023-06-14","2023-06-15","2023-06-16","2023-06-17","2023-06-18","2023-06-19","2023-06-20","2023-06-21","2023-06-22","2023-06-23","2023-06-24","2023-06-25","2023-06-26","2023-06-27","2023-06-28","2023-06-29","2023-06-30",
+        "2023-07-01","2023-07-02","2023-07-03","2023-07-04","2023-07-05","2023-07-06","2023-07-07","2023-07-08","2023-07-09","2023-07-10","2023-07-11","2023-07-12","2023-07-13","2023-07-14","2023-07-15","2023-07-16","2023-07-17","2023-07-18","2023-07-19","2023-07-20","2023-07-21","2023-07-22","2023-07-23","2023-07-24","2023-07-25","2023-07-26","2023-07-27","2023-07-28","2023-07-29","2023-07-30","2023-07-31",
+        "2023-08-01","2023-08-02","2023-08-03","2023-08-04","2023-08-05","2023-08-06","2023-08-07","2023-08-08","2023-08-09","2023-08-10","2023-08-11","2023-08-12","2023-08-13","2023-08-14","2023-08-15","2023-08-16","2023-08-17","2023-08-18","2023-08-19","2023-08-20","2023-08-21","2023-08-22","2023-08-23","2023-08-24","2023-08-25","2023-08-26","2023-08-27","2023-08-28","2023-08-29","2023-08-30","2023-08-31",
+        "2023-09-01","2023-09-02","2023-09-03","2023-09-04","2023-09-05","2023-09-06","2023-09-07","2023-09-08","2023-09-09","2023-09-10","2023-09-11","2023-09-12","2023-09-13","2023-09-14","2023-09-15","2023-09-16","2023-09-17","2023-09-18","2023-09-19","2023-09-20","2023-09-21","2023-09-22","2023-09-23","2023-09-24","2023-09-25","2023-09-26","2023-09-27","2023-09-28","2023-09-29","2023-09-30",
+        "2023-10-01","2023-10-02","2023-10-03","2023-10-04","2023-10-05","2023-10-06","2023-10-07","2023-10-08","2023-10-09","2023-10-10","2023-10-11","2023-10-12","2023-10-13","2023-10-14","2023-10-15","2023-10-16","2023-10-17","2023-10-18","2023-10-19","2023-10-20","2023-10-21","2023-10-22","2023-10-23","2023-10-24","2023-10-25","2023-10-26","2023-10-27","2023-10-28","2023-10-29","2023-10-30","2023-10-31",
+        "2023-11-01","2023-11-02","2023-11-03","2023-11-04","2023-11-05","2023-11-06","2023-11-07","2023-11-08","2023-11-09","2023-11-10","2023-11-11","2023-11-12","2023-11-13","2023-11-14","2023-11-15","2023-11-16","2023-11-17","2023-11-18","2023-11-19","2023-11-20","2023-11-21","2023-11-22","2023-11-23","2023-11-24","2023-11-25","2023-11-26","2023-11-27","2023-11-28","2023-11-29","2023-11-30",
+        "2023-12-01","2023-12-02","2023-12-03","2023-12-04","2023-12-05","2023-12-06","2023-12-07","2023-12-08","2023-12-09","2023-12-10","2023-12-11","2023-12-12","2023-12-13","2023-12-14","2023-12-15","2023-12-16","2023-12-17","2023-12-18","2023-12-19","2023-12-20","2023-12-21","2023-12-22","2023-12-23","2023-12-24","2023-12-25","2023-12-26","2023-12-27","2023-12-28","2023-12-29","2023-12-30","2023-12-31",
+        ],
+        labels: {
+          style: { cssClass: "grey--text lighten-2--text fill-color" },
+        },
+      },
+    
+      yaxis: {
+        show: true,
+        min: 50000000,
+        max: 200000000,
+        tickAmount: 4,
+        labels: {
+          style: {
+            cssClass: "grey--text lighten-2--text fill-color",
+          },
+        },
+      },
+      stroke: {
+        show: true,
+        width: 3,
+        lineCap: "butt",
+        colors: ["#5D87FF"],
+      },
+    
+      tooltip: { theme: "light" },
+    
+      responsive: [
+        {
+          breakpoint: 600,
+          options: {
+            plotOptions: {
+              line: {
+                borderRadius: 3,
               }
+            },
           }
-      });
+        }
+      ]
+    };
+    
+    var chart = new ApexCharts(document.querySelector("#chart"), chart);
+    chart.render();
+  </script>
+  <script>
+    var breakup = {
+      color: "#adb5bd",
+      series: [38, 40, 25],
+      labels: ["2022", "2021", "2020"],
+      chart: {
+        width: 180,
+        type: "donut",
+        fontFamily: "Plus Jakarta Sans', sans-serif",
+        foreColor: "#adb0bb",
+      },
+      plotOptions: {
+        pie: {
+          startAngle: 0,
+          endAngle: 360,
+          donut: {
+            size: '75%',
+          },
+        },
+      },
+      stroke: {
+        show: false,
+      },
+  
+      dataLabels: {
+        enabled: false,
+      },
+  
+      legend: {
+        show: false,
+      },
+      colors: ["#5D87FF", "#ecf2ff", "#F9F9FD"],
+  
+      responsive: [
+        {
+          breakpoint: 991,
+          options: {
+            chart: {
+              width: 150,
+            },
+          },
+        },
+      ],
+      tooltip: {
+        theme: "dark",
+        fillSeriesColor: false,
+      },
+    };
+  
+    var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
+    chart.render();
+  </script>
+  <script>
+    var earning = {
+      chart: {
+        id: "sparkline3",
+        type: "area",
+        height: 60,
+        sparkline: {
+          enabled: true,
+        },
+        group: "sparklines",
+        fontFamily: "Plus Jakarta Sans', sans-serif",
+        foreColor: "#adb0bb",
+      },
+      series: [
+        {
+          name: "Earnings",
+          color: "#49BEFF",
+          data: [24,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          26,
+          26,
+          27,
+          27,
+          28,
+          29,
+          29,
+          29,
+          29,
+          29,
+          28,
+          28,
+          27,
+          27,
+          27,
+          26,],
+        },
+      ],
+      stroke: {
+        curve: "smooth",
+        width: 2,
+      },
+      fill: {
+        colors: ["#f3feff"],
+        type: "solid",
+        opacity: 0.05,
+      },
+  
+      markers: {
+        size: 0,
+      },
+      tooltip: {
+        theme: "dark",
+        fixed: {
+          enabled: true,
+          position: "right",
+        },
+        x: {
+          show: false,
+        },
+      },
+    };
+    new ApexCharts(document.querySelector("#earning"), earning).render();
+  </script>
+</body>
 
-
-            const ctx2 = document.getElementById('avgUserLevelChart').getContext('2d');
-            const avgUserLevelChart = new Chart(ctx2, {
-                type: 'line',
-                data: {
-                    labels: labels_avg_user_level,
-                    datasets: [{
-                        label: 'Average User Level',
-                        data: values_avg_user_level,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                  aspectRatio: 2,
-                  scales: {
-                      y: {
-                          beginAtZero: true,
-                          display:true,
-                          title:{
-                              display:true,
-                              text:'Average User Level Rating (1-10)',
-                              font:{
-                                  style:'normal',
-                                  lineHeight :1.2
-                              },
-                              padding:{top :0,left :0,right :0,bottom :5}
-                          }
-                      },
-                      x:{
-                          beginAtZero:true,
-                          display:true,
-                          title:{
-                              display:true,
-                              text:'Bite ID',
-                              font:{
-                                  style:'normal',
-                                  lineHeight :1.2
-                              },
-                              padding:{top :5,left :0,right :0,bottom :0}
-                          }
-                      }
-                  }
-              }
-          });
-
-
-          const ctx3 = document.getElementById('pieChart').getContext('2d');
-          const pieChart = new Chart(ctx3, {
-              type: 'pie',
-              data: {
-                  labels: labels_pie_chart,
-                  datasets: [{
-                      label: 'Pie Chart',
-                      data: values_pie_chart,
-                      backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-                      borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
-                      borderWidth: 1
-                  }]
-              },
-              options: {
-                aspectRatio: 2,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        display:true,
-                        title:{
-                            display:true,
-                            text:'Pie Chart',
-                            font:{
-                                style:'normal',
-                                lineHeight :1.2
-                            },
-                            padding:{top :0,left :0,right :0,bottom :5}
-                        }
-                      },
-                      x:{
-                            beginAtZero:true,
-                            display:true,
-                            title:{
-                                display:true,
-                                text:'Labels',
-                                font:{
-                                    style:'normal',
-                                    lineHeight :1.2
-                                },
-                                padding:{top :5,left :0,right :0,bottom :0}
-                    }
-                }
-              }
-          }
-        });
-
-          const ctx4 = document.getElementById('doughnutChart').getContext('2d');
-          const doughnutChart = new Chart(ctx4, {
-              type: 'doughnut',
-              data: {
-                  labels: labels_doughnut_chart,
-                  datasets: [{
-                      label: 'Doughnut Chart',
-                      data: values_doughnut_chart,
-                      backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-                      borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
-                      borderWidth: 1
-                  }]
-              },
-              options: {
-                aspectRatio: 2,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        display:true,
-                        title:{
-                            display:true,
-                            text:'Doughnut Chart',
-                            font:{
-                                style:'normal',
-                                lineHeight :1.2
-                            },
-                            padding:{top :0,left :0,right :0,bottom :5}
-                        }
-                    },
-                    x:{
-                        beginAtZero:true,
-                        display:true,
-                        title:{
-                            display:true,
-                            text:'Labels',
-                            font:{
-                                style:'normal',
-                                lineHeight :1.2
-                            },
-                            padding:{top :5,left :0,right :0,bottom :0}
-                        }
-                    }
-                  }
-              }
-          });
-
-          const ctx5 = document.getElementById('radarChart').getContext('2d');
-          const radarChart = new Chart(ctx5, {
-              type: 'radar',
-              data: {
-                  labels: labels_radar_chart,
-                  datasets: [{
-                  label: 'Radar Chart',
-                      data: values_radar_chart,
-                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                      borderColor: 'rgba(75, 192, 192, 1)',
-                      borderWidth: 1
-                  }]
-              },
-              options: {
-                aspectRatio: 2,
-                scales: {
-                  y: {
-                      beginAtZero: true,
-                      display:true,
-                      title:{
-                          display:true,
-                          text:'Radar Chart',
-                          font:{
-                              style:'normal',
-                              lineHeight :1.2
-                          },
-                          padding:{top :0,left :0,right :0,bottom :5}
-                      }
-                  },
-                  x:{
-                      beginAtZero:true,
-                      display:true,
-                      title:{
-                          display:true,
-                          text:'Labels',
-                          font:{
-                              style:'normal',
-                              lineHeight :1.2
-                          },
-                          padding:{top :5,left :0,right :0,bottom :0}
-                      }
-                  }
-                  }
-              }
-          });
-    </script>
-  </body>
 </html>
+
